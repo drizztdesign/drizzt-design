@@ -94,34 +94,8 @@
     update();
   }
 
-  /* ---------- 4. Kinetic typography sobre h1 del hero ---------- */
-  if (!reduced) {
-    const targets = document.querySelectorAll('.hero h1, .page-hero h1, .hero-text h1');
-    targets.forEach((h1) => {
-      let charIdx = 0;
-      function walk(node, parent) {
-        if (node.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          for (const c of node.textContent) {
-            if (c === ' ' || c === '\n' || c === '\t') {
-              frag.appendChild(document.createTextNode(c));
-            } else {
-              const span = document.createElement('span');
-              span.className = 'kinetic-char';
-              span.style.animationDelay = (charIdx * 28) + 'ms';
-              span.textContent = c;
-              frag.appendChild(span);
-              charIdx++;
-            }
-          }
-          parent.replaceChild(frag, node);
-        } else if (node.nodeType === 1) {
-          [...node.childNodes].forEach((c) => walk(c, node));
-        }
-      }
-      [...h1.childNodes].forEach((c) => walk(c, h1));
-    });
-  }
+  /* ---------- 4. Hero H1: sin animación de entrada (el gradient text del <em> ya
+        anima por sí solo y la animación de bloque interfiere con el render del em) ---------- */
 
   /* ---------- 5. Word-reveal: split en palabras (preserva <br>) ---------- */
   document.querySelectorAll('.word-reveal').forEach((el) => {

@@ -48,6 +48,21 @@ Bitácora cronológica de la web propia del estudio.
 **Archivos:** index.html
 
 > Paleta cambiada el 2026-04-26 a tonos azulados: ahora el gradiente del placeholder es azul/charcoal.
+> Vídeo añadido el 2026-04-26 — placeholder eliminado, ver entrada siguiente.
+
+### 2026-04-26 — Vídeo de transición wireframe → filled activado en el hero
+
+**Qué:** El usuario aportó 3 archivos en Descargas: un MP4 (5s, 24fps, 3836×2160, 7.4 MB) con la animación de wireframe → web finalizada, y dos PNG 1672×941 con los frames inicial (wireframe) y final (filled). Procesado en `assets/`: `hero.mp4` (master, gitignored), `hero-scrub.mp4` (1920w, all I-frames, CRF 14, 18 MB — desktop), `hero-scrub-mobile.mp4` (1280w, all I-frames, CRF 22, 4.2 MB — mobile autoplay/loop), `hero-poster.jpg` (wireframe, frame 0 del vídeo, 220 KB) y `og-image.jpg` (filled, 1200×675, 146 KB — social previews).
+**Por qué:** El hero scroll-driven es el momento "wow" que vende el estudio: el visitante ve cómo se construye una web profesional en directo al hacer scroll. El poster wireframe encaja perfecto con el frame 0 del vídeo, así no hay flash al cargar. La OG image filled muestra el resultado terminado en redes sociales.
+**Cómo:**
+  1. `cp` del MP4 a `assets/hero.mp4`.
+  2. FFmpeg desktop: `ffmpeg -i hero.mp4 -c:v libx264 -x264opts "keyint=1:min-keyint=1:no-scenecut" -crf 14 -preset slow -tune film -vf "scale=1920:-2" -an -movflags +faststart hero-scrub.mp4`.
+  3. FFmpeg mobile: ídem con `-crf 22 -vf "scale=1280:-2"`.
+  4. PNGs convertidas con `ffmpeg -vf "scale=1200:-2" -q:v 2` (og-image) y `scale=1920:-2 -q:v 3` (hero-poster).
+  5. En `index.html` reemplazado `<div class="hero-placeholder"></div>` por el `<video>` con `preload="auto"`, `poster="assets/hero-poster.jpg"` y dos `<source>` (mobile media-query + desktop fallback).
+  6. Descomentado el bloque `SCROLL-VIDEO` del `<script>` (mobile = autoplay/loop simple; desktop = scrubbing throttleado a 50ms con lerp `diff*0.4`).
+  7. Bug crítico encontrado: `premium.css` tenía `header, main, section, footer { position: relative }` que sobrescribía el `position: sticky` del `.hero` (necesario para el scroll-driven). Corregido a `section:not(.hero)`.
+**Archivos:** assets/hero.mp4, assets/hero-scrub.mp4, assets/hero-scrub-mobile.mp4, assets/hero-poster.jpg, assets/og-image.jpg, index.html, assets/premium.css
 
 ### 2026-04-26 — Cambiar paleta principal de naranja a tonos azulados
 
@@ -80,17 +95,7 @@ Bitácora cronológica de la web propia del estudio.
 
 ## 10. Mantenimiento y notas
 
-### Pendiente cuando llegue el vídeo de transición:
-
-1. Subir el `.mp4` original a `assets/hero.mp4`
-2. Ejecutar el re-encoding con FFmpeg (ver skill `scroll-video`):
-   - Versión desktop: `assets/hero-scrub.mp4` (CRF 14, all I-frames)
-   - Versión móvil 720p: `assets/hero-scrub-mobile.mp4`
-3. Generar `assets/og-image.jpg` desde un frame del vídeo
-4. En `index.html`:
-   - Reemplazar `<div class="hero-placeholder"></div>` por el `<video>` (ver comentario en el HTML)
-   - Descomentar el bloque `SCROLL-VIDEO STUB` al final del `<script>`
-5. `/deploy "Vídeo hero añadido"`
+### ~~Pendiente cuando llegue el vídeo de transición~~ ✓ Completado el 2026-04-26 (ver entrada en _Diseño y UI_)
 
 ### Pendiente de revisar:
 - Email real del estudio (placeholder: hola@drizzt.design)

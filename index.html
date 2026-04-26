@@ -280,14 +280,10 @@
 <!-- SCROLL-VIDEO-SECTION -->
 <div class="hero-wrapper">
 <section class="hero">
-  <!-- VIDEO PENDIENTE: cuando el usuario envíe el clip de transición, sustituir el .hero-placeholder por:
-       <video id="heroVideo" muted playsinline preload="auto" poster="assets/og-image.jpg">
-         <source src="assets/hero-scrub-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
-         <source src="assets/hero-scrub.mp4" type="video/mp4">
-       </video>
-       Y descomentar el script scroll-video al final.
-  -->
-  <div class="hero-placeholder"></div>
+  <video id="heroVideo" muted playsinline preload="auto" poster="assets/hero-poster.jpg">
+    <source src="assets/hero-scrub-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
+    <source src="assets/hero-scrub.mp4" type="video/mp4">
+  </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Estudio de diseño y desarrollo</p>
@@ -518,8 +514,7 @@
   mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
-  // SCROLL-VIDEO STUB — descomentar cuando se añada el vídeo del hero (ver comentario en HTML del hero)
-  /*
+  // SCROLL-VIDEO — vídeo de transición wireframe → filled, ligado al scroll
   // Mobile bypass
   (function () {
     var video = document.getElementById('heroVideo');
@@ -575,7 +570,6 @@
     video.addEventListener('loadedmetadata', function () { video.currentTime = 0.001; onScroll(); });
     video.addEventListener('ended', function () { complete = true; });
   }());
-  */
 </script>
 
 <div class="cursor" aria-hidden="true"></div>

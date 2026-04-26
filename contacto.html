@@ -187,46 +187,29 @@
 
       <div>
         <h2 class="form-title">Cuéntanos tu proyecto.</h2>
-        <!-- ============================================================
-             FORMULARIO GOOGLE FORMS — instrucciones de setup
-             1. Crear un Google Form en forms.google.com con estos campos
-                (en este orden, mismos tipos):
-                · Nombre (texto, obligatorio)
-                · Empresa o estudio (texto, opcional)
-                · Email (texto, obligatorio)
-                · ¿Qué necesitas? (desplegable: Web nueva / Rebuild /
-                                  Mantenimiento mensual / Solo SEO / Otro)
-                · Presupuesto orientativo (desplegable con rangos)
-                · Mensaje (párrafo, obligatorio)
-             2. En "Respuestas" → activar notificaciones por email
-             3. Click ⋮ → "Obtener vínculo prellenado". Rellenar cada campo
-                con texto único (NOMBRE_X, EMP_X…) y copiar el enlace.
-             4. La URL contiene ?entry.123=NOMBRE_X&entry.456=EMP_X&…
-                Sustituir abajo cada FORM_ENTRY_X por su número.
-             5. Sustituir GOOGLE_FORM_ID por el ID del form (entre /e/ y /viewform).
-             ============================================================ -->
+        <!-- Form conectado a Google Forms → notificaciones a oficiall.drizzt@gmail.com -->
         <form id="contactForm"
-              action="https://docs.google.com/forms/d/e/GOOGLE_FORM_ID/formResponse"
+              action="https://docs.google.com/forms/d/e/1FAIpQLScNQyTEvk0KGt4R9cmNsJRHvtMyh0GlMCiWgh6Y5CsaCN50bw/formResponse"
               method="POST" target="hidden_iframe" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre *</label>
-              <input type="text" id="nombre" name="entry.FORM_ENTRY_NOMBRE" placeholder="Tu nombre" required>
+              <input type="text" id="nombre" name="entry.1998025853" placeholder="Tu nombre" required>
               <span class="field-error" id="err-nombre">Por favor, indica tu nombre.</span>
             </div>
             <div class="form-group">
               <label for="empresa">Empresa o estudio</label>
-              <input type="text" id="empresa" name="entry.FORM_ENTRY_EMPRESA" placeholder="Nombre del estudio">
+              <input type="text" id="empresa" name="entry.949115564" placeholder="Nombre del estudio">
             </div>
           </div>
           <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="entry.FORM_ENTRY_EMAIL" placeholder="tu@email.com" required>
+            <input type="email" id="email" name="entry.507241592" placeholder="tu@email.com" required>
             <span class="field-error" id="err-email">Email inválido.</span>
           </div>
           <div class="form-group">
             <label for="tipo">¿Qué necesitas?</label>
-            <select id="tipo" name="entry.FORM_ENTRY_TIPO">
+            <select id="tipo" name="entry.363373526">
               <option value="">— Selecciona —</option>
               <option>Web nueva desde cero</option>
               <option>Rebuild de web existente</option>
@@ -237,7 +220,7 @@
           </div>
           <div class="form-group">
             <label for="presupuesto">Presupuesto orientativo</label>
-            <select id="presupuesto" name="entry.FORM_ENTRY_PRESUPUESTO">
+            <select id="presupuesto" name="entry.1129209405">
               <option value="">— Selecciona —</option>
               <option>&lt; 1.000 €</option>
               <option>1.000 - 3.000 €</option>
@@ -249,7 +232,7 @@
           </div>
           <div class="form-group">
             <label for="mensaje">Mensaje *</label>
-            <textarea id="mensaje" name="entry.FORM_ENTRY_MENSAJE" placeholder="Describe tu proyecto: sector, objetivos, plazos…" required></textarea>
+            <textarea id="mensaje" name="entry.1189597305" placeholder="Describe tu proyecto: sector, objetivos, plazos…" required></textarea>
             <span class="field-error" id="err-mensaje">Cuéntanos algo sobre tu proyecto.</span>
           </div>
           <p class="form-note">Al enviar aceptas que usemos tus datos para responder a tu consulta. No los compartiremos con nadie.</p>
