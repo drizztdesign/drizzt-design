@@ -241,8 +241,16 @@
       .hamburger { display: flex; }
     }
   </style>
+  <link rel="stylesheet" href="assets/premium.css">
 </head>
 <body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
 
 <header id="header">
   <div class="header-inner">
@@ -297,12 +305,33 @@
 </section>
 </div>
 
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Diseño web</span>
+    <span class="marquee-item">Desarrollo frontend</span>
+    <span class="marquee-item">Identidad visual</span>
+    <span class="marquee-item">SEO técnico</span>
+    <span class="marquee-item">Editorial</span>
+    <span class="marquee-item">Mobile-first</span>
+    <span class="marquee-item">Performance</span>
+    <span class="marquee-item">Accesibilidad</span>
+    <span class="marquee-item">Diseño web</span>
+    <span class="marquee-item">Desarrollo frontend</span>
+    <span class="marquee-item">Identidad visual</span>
+    <span class="marquee-item">SEO técnico</span>
+    <span class="marquee-item">Editorial</span>
+    <span class="marquee-item">Mobile-first</span>
+    <span class="marquee-item">Performance</span>
+    <span class="marquee-item">Accesibilidad</span>
+  </div>
+</div>
+
 <section class="intro">
   <div class="container">
     <div class="intro-grid">
       <div>
         <p class="section-eyebrow">El estudio</p>
-        <h2 class="section-title">Diseño con propósito,<br>código sin fricciones.</h2>
+        <h2 class="section-title"><span class="word-reveal">Diseño con propósito,<br>código sin fricciones.</span></h2>
       </div>
       <div>
         <p class="section-text">No usamos plantillas. Cada proyecto se construye desde cero en HTML, CSS y JavaScript puros — sin frameworks pesados, sin bloat, sin limitaciones de plugins. El resultado: webs rápidas, mantenibles y con identidad propia.</p>
@@ -332,7 +361,7 @@
 <section class="servicios">
   <div class="container">
     <p class="section-eyebrow">Servicios</p>
-    <h2 class="section-title">Lo que hacemos.</h2>
+    <h2 class="section-title"><span class="word-reveal">Lo que hacemos.</span></h2>
     <div class="servicios-grid">
       <div class="servicio">
         <p class="servicio-num">01 / Diseño web</p>
@@ -361,7 +390,7 @@
 <section class="proceso">
   <div class="container">
     <p class="section-eyebrow">Proceso</p>
-    <h2 class="section-title">Cómo trabajamos.</h2>
+    <h2 class="section-title"><span class="word-reveal">Cómo trabajamos.</span></h2>
     <div class="proceso-grid">
       <div class="paso">
         <p class="paso-num">01</p>
@@ -390,7 +419,7 @@
 <section class="proyectos-preview">
   <div class="container">
     <p class="section-eyebrow">Trabajos recientes</p>
-    <h2 class="section-title">Algunos proyectos.</h2>
+    <h2 class="section-title"><span class="word-reveal">Algunos proyectos.</span></h2>
     <div class="proyectos-preview-grid">
       <a class="proyecto-card" href="proyectos.html">
         <div class="proyecto-card-content">
@@ -460,7 +489,7 @@
       <h4>Contacto</h4>
       <ul>
         <li><a href="contacto.html">Iniciar proyecto</a></li>
-        <li><a href="mailto:hola@drizzt.design"><!-- REVISAR: email real -->hola@drizzt.design</a></li>
+        <li><a href="mailto:oficiall.drizzt@gmail.com">oficiall.drizzt@gmail.com</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -471,6 +500,7 @@
       </ul>
     </div>
   </div>
+  <div class="footer-monumental" aria-hidden="true">DRIZZT</div>
   <div class="footer-bottom">
     <span>© Drizzt Design · Todos los derechos reservados</span>
     <span>Construido con HTML + CSS + JS puro</span>
@@ -547,5 +577,10 @@
   }());
   */
 </script>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="page-transition" aria-hidden="true"></div>
+<script src="assets/premium.js" defer></script>
 </body>
 </html>
