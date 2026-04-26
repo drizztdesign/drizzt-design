@@ -528,37 +528,56 @@
       return;
     }
   }());
-  // Desktop scroll-driven scrubbing
+  // DESKTOP: rAF lerp continuo (requiere vídeo encodado con keyint=1)
   (function () {
     if (window.matchMedia('(max-width: 768px)').matches) return;
-    var video = document.getElementById('heroVideo');
+    var video   = document.getElementById('heroVideo');
     var wrapper = document.querySelector('.hero-wrapper');
     if (!video || !wrapper) return;
-    var complete = false, rafId = null, lastUpdate = 0, THROTTLE = 50;
+
+    var complete = false;
+    var rafId    = null;
+    var current  = 0;
+    var LERP     = 0.18;
+
     function wrapTop() { return wrapper.getBoundingClientRect().top + window.scrollY; }
-    function range() { return wrapper.offsetHeight - window.innerHeight; }
+    function range()   { return Math.max(1, wrapper.offsetHeight - window.innerHeight); }
     function targetTime() {
       if (!video.duration) return 0;
-      var s = Math.max(0, window.scrollY - wrapTop());
-      return Math.min(1, s / range()) * video.duration;
+      var scrolled = Math.max(0, window.scrollY - wrapTop());
+      return Math.min(1, scrolled / range()) * video.duration;
     }
-    function setVideoTime(t) { if (video.fastSeek) video.fastSeek(t); else video.currentTime = t; }
-    function tick(now) {
+
+    function tick() {
       if (!video.duration) { rafId = null; return; }
-      if (now - lastUpdate < THROTTLE) { rafId = requestAnimationFrame(tick); return; }
-      var target = targetTime(), current = video.currentTime, diff = target - current;
-      if (Math.abs(diff) < 0.04) { setVideoTime(target); if (target >= video.duration - 0.2) complete = true; rafId = null; return; }
-      setVideoTime(current + diff * 0.4); lastUpdate = now;
+      var target = targetTime();
+      var diff   = target - current;
+      var k = Math.abs(diff) > 0.8 ? Math.min(0.5, LERP + Math.abs(diff) * 0.08) : LERP;
+      if (Math.abs(diff) < 0.003) {
+        current = target;
+        try { video.currentTime = current; } catch (_) {}
+        if (target >= video.duration - 0.1) complete = true;
+        rafId = null;
+        return;
+      }
+      current += diff * k;
+      try { video.currentTime = current; } catch (_) {}
       rafId = requestAnimationFrame(tick);
     }
-    function onScroll() { if (!video.duration) return; if (!rafId) rafId = requestAnimationFrame(tick); }
+
+    function onScroll() {
+      if (!video.duration) return;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }
+
     window.addEventListener('wheel', function (e) {
       if (complete || !video.duration || e.deltaY <= 0) return;
       var end = wrapTop() + range();
       if (window.scrollY + e.deltaY > end && video.currentTime < video.duration - 0.3) e.preventDefault();
     }, { passive: false });
+
     var touchStartY = 0;
-    window.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY, { passive: true });
+    window.addEventListener('touchstart', function (e) { touchStartY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchmove', function (e) {
       if (complete || !video.duration) return;
       var dy = touchStartY - e.touches[0].clientY;
@@ -566,8 +585,11 @@
       var end = wrapTop() + range();
       if (window.scrollY + dy > end && video.currentTime < video.duration - 0.3) e.preventDefault();
     }, { passive: false });
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    video.addEventListener('loadedmetadata', function () { video.currentTime = 0.001; onScroll(); });
+    video.addEventListener('loadeddata', function () {
+      video.pause(); current = 0; video.currentTime = 0; onScroll();
+    });
     video.addEventListener('ended', function () { complete = true; });
   }());
 </script>
