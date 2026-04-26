@@ -6,3 +6,5 @@ Thumbs.db
 .claude/scripts/screenshots/
 .claude/scripts/__pycache__/
 assets/hero.mp4
+
+.vercel

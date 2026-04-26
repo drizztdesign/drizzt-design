@@ -8,7 +8,7 @@ Bitácora cronológica de la web propia del estudio.
 **Sector:** Diseño y desarrollo web para estudios profesionales
 **Stack:** HTML + CSS + JavaScript puro
 **Tipografías:** Space Grotesk (display) + Inter (body) — vibe tech/editorial
-**Paleta:** charcoal (#0a0a0a) + naranja vibrante (#fb923c) — diferenciado de Gausark
+**Paleta:** charcoal (#0a0a0a) + azul cielo vibrante (#60a5fa, hover #3b82f6) — diferenciado de Gausark
 **Páginas:** index, servicios, proyectos, nosotros, contacto
 
 ## 1. Decisiones iniciales
@@ -36,6 +36,8 @@ Bitácora cronológica de la web propia del estudio.
 **Cómo:** Diseño editorial con bordes finos, números grandes en las secciones, hover con borde naranja en cards, hero asimétrico alineado a la izquierda.
 **Archivos:** index.html, servicios.html, proyectos.html, nosotros.html, contacto.html
 
+> Paleta cambiada el 2026-04-26 a tonos azulados: ver entrada en _Diseño y UI_.
+
 ## 4. Diseño y UI
 
 ### 2026-04-26 — Hero preparado para vídeo de transición pendiente
@@ -44,6 +46,15 @@ Bitácora cronológica de la web propia del estudio.
 **Por qué:** El usuario aún no ha enviado el clip de transición. La web ya luce bien con el placeholder; cuando llegue el vídeo solo hay que descomentar el `<video>` y el script.
 **Cómo:** Comentario claro en el HTML del hero indicando exactamente qué descomentar.
 **Archivos:** index.html
+
+> Paleta cambiada el 2026-04-26 a tonos azulados: ahora el gradiente del placeholder es azul/charcoal.
+
+### 2026-04-26 — Cambiar paleta principal de naranja a tonos azulados
+
+**Qué:** Reemplazado el accent naranja (`#fb923c` / hover `#ea7c1f`) por azul cielo vibrante (`#60a5fa` / hover `#3b82f6`) en las 5 páginas. También actualizados los gradientes radiales del hero del index (`rgba(251,146,60,...)` → `rgba(96,165,250,...)`).
+**Por qué:** El usuario pidió tonos azulados como color principal. El azul `#60a5fa` (sky-400) mantiene contraste WCAG AA sobre el charcoal `#0a0a0a` y conserva el carácter premium del diseño editorial.
+**Cómo:** `replace_all` sobre los hex `#fb923c` → `#60a5fa` y `#ea7c1f` → `#3b82f6` en cada HTML, más reemplazo manual de los dos `rgba(251,146,60,...)` en index.html.
+**Archivos:** index.html, servicios.html, proyectos.html, nosotros.html, contacto.html
 
 ## 5. Contenido y datos
 

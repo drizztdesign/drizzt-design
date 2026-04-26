@@ -41,7 +41,7 @@
 
     :root {
       --color-bg: #0a0a0a; --color-bg-2: #141414; --color-text: #fafafa; --color-mid: #888;
-      --color-line: #222; --color-accent: #fb923c; --color-accent-hover: #ea7c1f;
+      --color-line: #222; --color-accent: #60a5fa; --color-accent-hover: #3b82f6;
       --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
       --max-w: 1280px;
     }
@@ -179,27 +179,46 @@
 
       <div>
         <h2 class="form-title">Cuéntanos tu proyecto.</h2>
-        <!-- REVISAR: sustituir YOUR_FORM_ID por el ID real de Formspree -->
-        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <!-- ============================================================
+             FORMULARIO GOOGLE FORMS — instrucciones de setup
+             1. Crear un Google Form en forms.google.com con estos campos
+                (en este orden, mismos tipos):
+                · Nombre (texto, obligatorio)
+                · Empresa o estudio (texto, opcional)
+                · Email (texto, obligatorio)
+                · ¿Qué necesitas? (desplegable: Web nueva / Rebuild /
+                                  Mantenimiento mensual / Solo SEO / Otro)
+                · Presupuesto orientativo (desplegable con rangos)
+                · Mensaje (párrafo, obligatorio)
+             2. En "Respuestas" → activar notificaciones por email
+             3. Click ⋮ → "Obtener vínculo prellenado". Rellenar cada campo
+                con texto único (NOMBRE_X, EMP_X…) y copiar el enlace.
+             4. La URL contiene ?entry.123=NOMBRE_X&entry.456=EMP_X&…
+                Sustituir abajo cada FORM_ENTRY_X por su número.
+             5. Sustituir GOOGLE_FORM_ID por el ID del form (entre /e/ y /viewform).
+             ============================================================ -->
+        <form id="contactForm"
+              action="https://docs.google.com/forms/d/e/GOOGLE_FORM_ID/formResponse"
+              method="POST" target="hidden_iframe" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre *</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+              <input type="text" id="nombre" name="entry.FORM_ENTRY_NOMBRE" placeholder="Tu nombre" required>
               <span class="field-error" id="err-nombre">Por favor, indica tu nombre.</span>
             </div>
             <div class="form-group">
               <label for="empresa">Empresa o estudio</label>
-              <input type="text" id="empresa" name="empresa" placeholder="Nombre del estudio">
+              <input type="text" id="empresa" name="entry.FORM_ENTRY_EMPRESA" placeholder="Nombre del estudio">
             </div>
           </div>
           <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            <input type="email" id="email" name="entry.FORM_ENTRY_EMAIL" placeholder="tu@email.com" required>
             <span class="field-error" id="err-email">Email inválido.</span>
           </div>
           <div class="form-group">
             <label for="tipo">¿Qué necesitas?</label>
-            <select id="tipo" name="tipo">
+            <select id="tipo" name="entry.FORM_ENTRY_TIPO">
               <option value="">— Selecciona —</option>
               <option>Web nueva desde cero</option>
               <option>Rebuild de web existente</option>
@@ -210,7 +229,7 @@
           </div>
           <div class="form-group">
             <label for="presupuesto">Presupuesto orientativo</label>
-            <select id="presupuesto" name="presupuesto">
+            <select id="presupuesto" name="entry.FORM_ENTRY_PRESUPUESTO">
               <option value="">— Selecciona —</option>
               <option>&lt; 1.000 €</option>
               <option>1.000 - 3.000 €</option>
@@ -222,7 +241,7 @@
           </div>
           <div class="form-group">
             <label for="mensaje">Mensaje *</label>
-            <textarea id="mensaje" name="mensaje" placeholder="Describe tu proyecto: sector, objetivos, plazos…" required></textarea>
+            <textarea id="mensaje" name="entry.FORM_ENTRY_MENSAJE" placeholder="Describe tu proyecto: sector, objetivos, plazos…" required></textarea>
             <span class="field-error" id="err-mensaje">Cuéntanos algo sobre tu proyecto.</span>
           </div>
           <p class="form-note">Al enviar aceptas que usemos tus datos para responder a tu consulta. No los compartiremos con nadie.</p>
@@ -230,6 +249,7 @@
           <div class="form-success" id="formSuccess">✓ Mensaje enviado. Te respondemos en menos de 24 horas.</div>
           <div class="form-error-msg" id="formError">✗ No se ha podido enviar. Inténtalo de nuevo o escríbenos directamente a hola@drizzt.design.</div>
         </form>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none" title="Submit handler"></iframe>
       </div>
 
     </div>
@@ -271,9 +291,12 @@
   mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
+  // Submit a Google Forms vía iframe oculto (Google bloquea CORS en fetch)
   const form = document.getElementById('contactForm');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  const iframe = document.getElementById('hidden_iframe');
+  let submitting = false;
+
+  form.addEventListener('submit', (e) => {
     let valid = true;
     ['nombre','email','mensaje'].forEach(id => {
       const el = document.getElementById(id);
@@ -282,21 +305,21 @@
         err.style.display = 'block'; valid = false;
       } else { err.style.display = 'none'; }
     });
-    if (!valid) return;
+    if (!valid) { e.preventDefault(); return; }
+
     const btn = form.querySelector('.btn-submit');
     btn.textContent = 'Enviando…';
     btn.disabled = true;
-    try {
-      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-      if (res.ok) {
-        document.getElementById('formSuccess').style.display = 'block';
-        document.getElementById('formError').style.display = 'none';
-        form.reset();
-      } else { throw new Error(); }
-    } catch {
-      document.getElementById('formError').style.display = 'block';
-      document.getElementById('formSuccess').style.display = 'none';
-    }
+    submitting = true;
+  });
+
+  iframe.addEventListener('load', () => {
+    if (!submitting) return;
+    submitting = false;
+    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('formError').style.display = 'none';
+    form.reset();
+    const btn = form.querySelector('.btn-submit');
     btn.textContent = 'Enviar mensaje →';
     btn.disabled = false;
   });
