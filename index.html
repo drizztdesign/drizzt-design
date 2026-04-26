@@ -109,16 +109,32 @@
       .hero-wrapper { height: auto; }
       .hero { position: relative; padding: 0 5vw; justify-content: center; text-align: center; }
     }
-    .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(10,10,10,.55) 100%); }
-    /* Placeholder mientras no hay vídeo: gradiente animado */
-    .hero-placeholder {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(96,165,250,.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(96,165,250,.08) 0%, transparent 60%),
-        linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+    .hero video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      z-index: 1;
     }
+    /* Canvas que sustituye al vídeo durante el scroll — drawImage es instant */
+    .hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0; transition: opacity .5s ease;
+      z-index: 1; pointer-events: none; display: block;
+    }
+    .hero-canvas.ready { opacity: 1; }
+    /* Poster mostrado mientras se renderizan los frames a memoria */
+    .hero-poster-bg {
+      position: absolute; inset: 0;
+      background-image: url('assets/hero-poster.jpg');
+      background-size: cover;
+      background-position: center;
+      transition: opacity .5s ease;
+      z-index: 0;
+    }
+    .hero-poster-bg.faded { opacity: 0; pointer-events: none; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(10,10,10,.55) 100%); z-index: 2; }
+    /* Placeholder original (sin uso ahora, el poster-bg lo sustituye) */
+    .hero-placeholder { display: none; }
     .hero-content { position: relative; z-index: 2; color: #fff; max-width: 760px; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -280,6 +296,7 @@
 <!-- SCROLL-VIDEO-SECTION -->
 <div class="hero-wrapper">
 <section class="hero">
+  <div class="hero-poster-bg" aria-hidden="true"></div>
   <video id="heroVideo" muted playsinline preload="auto" poster="assets/hero-poster.jpg">
     <source src="assets/hero-scrub-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
     <source src="assets/hero-scrub.mp4" type="video/mp4">
@@ -528,11 +545,14 @@
       return;
     }
   }());
-  // DESKTOP: rAF lerp continuo + prewarm del decoder (keyint=1 + preload)
+  // DESKTOP: CANVAS APPROACH — pre-renderiza cada frame del vídeo a ImageBitmap,
+  // sustituye el <video> por un <canvas>. drawImage(bitmap) es instantáneo (GPU),
+  // no depende del decoder de vídeo durante el scroll. Imposible que tartamudee.
   (function () {
     if (window.matchMedia('(max-width: 768px)').matches) return;
-    var video   = document.getElementById('heroVideo');
-    var wrapper = document.querySelector('.hero-wrapper');
+    var video       = document.getElementById('heroVideo');
+    var wrapper     = document.querySelector('.hero-wrapper');
+    var placeholder = document.querySelector('.hero-poster-bg');
     if (!video || !wrapper) return;
 
     var ready    = false;
@@ -540,89 +560,188 @@
     var rafId    = null;
     var current  = 0;
     var LERP     = 0.18;
+    var frames   = [];
+    var canvas   = null;
+    var ctx      = null;
 
     function wrapTop() { return wrapper.getBoundingClientRect().top + window.scrollY; }
     function range()   { return Math.max(1, wrapper.offsetHeight - window.innerHeight); }
-    function targetTime() {
-      if (!video.duration) return 0;
+    function targetIndex() {
+      if (!frames.length) return 0;
       var scrolled = Math.max(0, window.scrollY - wrapTop());
-      return Math.min(1, scrolled / range()) * video.duration;
+      var p = Math.min(1, scrolled / range());
+      return p * (frames.length - 1);
+    }
+    function drawFrame(idx) {
+      if (!ctx) return;
+      idx = Math.max(0, Math.min(frames.length - 1, idx | 0));
+      var bmp = frames[idx];
+      if (bmp) ctx.drawImage(bmp, 0, 0, canvas.width, canvas.height);
     }
 
     function tick() {
-      if (!ready || !video.duration) { rafId = null; return; }
-      var target = targetTime();
+      if (!ready || !frames.length) { rafId = null; return; }
+      var target = targetIndex();
       var diff   = target - current;
-      var k = Math.abs(diff) > 0.8 ? Math.min(0.5, LERP + Math.abs(diff) * 0.08) : LERP;
-      if (Math.abs(diff) < 0.003) {
+      var k = Math.abs(diff) > 4 ? Math.min(0.5, LERP + Math.abs(diff) * 0.02) : LERP;
+      if (Math.abs(diff) < 0.05) {
         current = target;
-        try { video.currentTime = current; } catch (_) {}
-        if (target >= video.duration - 0.1) complete = true;
+        drawFrame(Math.round(current));
+        if (current >= frames.length - 1.05) complete = true;
         rafId = null;
         return;
       }
       current += diff * k;
-      try { video.currentTime = current; } catch (_) {}
+      drawFrame(Math.round(current));
       rafId = requestAnimationFrame(tick);
     }
 
     function onScroll() {
-      if (!ready || !video.duration) return;
+      if (!ready || !frames.length) return;
       if (!rafId) rafId = requestAnimationFrame(tick);
     }
 
     function finishPrewarm() {
       if (ready) return;
-      try { video.pause(); } catch (_) {}
-      video.playbackRate = 1;
-      try { video.currentTime = 0; } catch (_) {}
-      current = 0; ready = true; onScroll();
+      ready = true;
+      drawFrame(0);
+      if (canvas) canvas.classList.add('ready');
+      if (placeholder) placeholder.classList.add('faded');
+      try { video.style.display = 'none'; } catch (_) {}
+      onScroll();
+    }
+
+    function setupCanvas(w, h) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'hero-canvas';
+      canvas.width = w;
+      canvas.height = h;
+      canvas.setAttribute('aria-hidden', 'true');
+      ctx = canvas.getContext('2d');
+      video.parentNode.insertBefore(canvas, video.nextSibling);
+    }
+
+    function captureFrames() {
+      return new Promise(function (resolve) {
+        var SCALE = 0.6;
+        var w = Math.max(2, Math.floor(video.videoWidth * SCALE));
+        var h = Math.max(2, Math.floor(video.videoHeight * SCALE));
+        var fps = 24;
+        var totalFrames = Math.max(1, Math.round(video.duration * fps));
+        var MAX_FRAMES = 200;
+        var stride = Math.max(1, Math.ceil(totalFrames / MAX_FRAMES));
+        var captureCount = Math.ceil(totalFrames / stride);
+
+        var off = document.createElement('canvas');
+        off.width = w; off.height = h;
+        var offctx = off.getContext('2d');
+        setupCanvas(w, h);
+
+        var i = 0;
+        function nextFrame() {
+          if (i >= captureCount) { resolve(); return; }
+          var t = (i * stride) / fps;
+          if (t >= video.duration) t = Math.max(0, video.duration - 0.001);
+          i++;
+
+          var captured = false;
+          function capture() {
+            if (captured) return;
+            captured = true;
+            try {
+              offctx.drawImage(video, 0, 0, w, h);
+              if (window.createImageBitmap) {
+                createImageBitmap(off).then(function (bmp) {
+                  frames.push(bmp);
+                  if (i % 10 === 0) setTimeout(nextFrame, 0); else nextFrame();
+                }).catch(function () {
+                  var copy = document.createElement('canvas');
+                  copy.width = w; copy.height = h;
+                  copy.getContext('2d').drawImage(off, 0, 0);
+                  frames.push(copy);
+                  nextFrame();
+                });
+              } else {
+                var copy = document.createElement('canvas');
+                copy.width = w; copy.height = h;
+                copy.getContext('2d').drawImage(off, 0, 0);
+                frames.push(copy);
+                nextFrame();
+              }
+            } catch (e) { nextFrame(); }
+          }
+
+          var safety = setTimeout(capture, 300);
+          if (video.requestVideoFrameCallback) {
+            video.requestVideoFrameCallback(function () {
+              clearTimeout(safety);
+              requestAnimationFrame(capture);
+            });
+          } else {
+            video.addEventListener('seeked', function onseek() {
+              video.removeEventListener('seeked', onseek);
+              clearTimeout(safety);
+              requestAnimationFrame(capture);
+            });
+          }
+          try { video.currentTime = t; } catch (_) { capture(); }
+        }
+        nextFrame();
+      });
     }
 
     function prewarm() {
-      if (!video.duration) {
-        video.addEventListener('loadeddata', prewarm, { once: true });
+      if (!video.videoWidth || !video.duration) {
+        video.addEventListener('loadedmetadata', prewarm, { once: true });
         return;
       }
-      video.muted = true;
-      video.playbackRate = 4;
-      var safetyMs = (video.duration / 4) * 1000 + 1500;
-      var safety = setTimeout(finishPrewarm, safetyMs);
-      video.addEventListener('ended', function () { clearTimeout(safety); finishPrewarm(); }, { once: true });
-      var p = video.play();
-      if (p && p.then) {
-        p.catch(function () {
-          clearTimeout(safety);
-          var samples = 12, i = 0;
-          function nextSeek() {
-            if (i >= samples) { finishPrewarm(); return; }
-            try { video.currentTime = (i / (samples - 1)) * video.duration; } catch (_) {}
-            i++;
-            video.addEventListener('seeked', nextSeek, { once: true });
-          }
-          nextSeek();
-        });
+      var url = null;
+      var sources = video.querySelectorAll('source');
+      for (var i = 0; i < sources.length; i++) {
+        var s = sources[i];
+        if (!s.media || window.matchMedia(s.media).matches) { url = s.src; break; }
       }
+      if (!url) url = video.currentSrc;
+
+      function afterFile() {
+        captureFrames().then(finishPrewarm).catch(finishPrewarm);
+      }
+
+      if (!url) { afterFile(); return; }
+
+      fetch(url).then(function (r) {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.blob();
+      }).then(function (blob) {
+        var blobUrl = URL.createObjectURL(blob);
+        while (video.firstChild) video.removeChild(video.firstChild);
+        video.src = blobUrl;
+        return new Promise(function (resolve, reject) {
+          var to = setTimeout(reject, 12000);
+          video.addEventListener('loadedmetadata', function () {
+            clearTimeout(to); resolve();
+          }, { once: true });
+        });
+      }).then(afterFile).catch(afterFile);
     }
 
     window.addEventListener('wheel', function (e) {
-      if (complete || !video.duration || e.deltaY <= 0) return;
+      if (complete || !ready || !frames.length || e.deltaY <= 0) return;
       var end = wrapTop() + range();
-      if (window.scrollY + e.deltaY > end && video.currentTime < video.duration - 0.3) e.preventDefault();
+      if (window.scrollY + e.deltaY > end && current < frames.length - 2) e.preventDefault();
     }, { passive: false });
 
     var touchStartY = 0;
     window.addEventListener('touchstart', function (e) { touchStartY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchmove', function (e) {
-      if (complete || !video.duration) return;
+      if (complete || !ready || !frames.length) return;
       var dy = touchStartY - e.touches[0].clientY;
       if (dy <= 0) return;
       var end = wrapTop() + range();
-      if (window.scrollY + dy > end && video.currentTime < video.duration - 0.3) e.preventDefault();
+      if (window.scrollY + dy > end && current < frames.length - 2) e.preventDefault();
     }, { passive: false });
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    video.addEventListener('ended', function () { complete = true; });
     prewarm();
   }());
 </script>
