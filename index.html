@@ -528,13 +528,14 @@
       return;
     }
   }());
-  // DESKTOP: rAF lerp continuo (requiere vídeo encodado con keyint=1)
+  // DESKTOP: rAF lerp continuo + prewarm del decoder (keyint=1 + preload)
   (function () {
     if (window.matchMedia('(max-width: 768px)').matches) return;
     var video   = document.getElementById('heroVideo');
     var wrapper = document.querySelector('.hero-wrapper');
     if (!video || !wrapper) return;
 
+    var ready    = false;
     var complete = false;
     var rafId    = null;
     var current  = 0;
@@ -549,7 +550,7 @@
     }
 
     function tick() {
-      if (!video.duration) { rafId = null; return; }
+      if (!ready || !video.duration) { rafId = null; return; }
       var target = targetTime();
       var diff   = target - current;
       var k = Math.abs(diff) > 0.8 ? Math.min(0.5, LERP + Math.abs(diff) * 0.08) : LERP;
@@ -566,8 +567,42 @@
     }
 
     function onScroll() {
-      if (!video.duration) return;
+      if (!ready || !video.duration) return;
       if (!rafId) rafId = requestAnimationFrame(tick);
+    }
+
+    function finishPrewarm() {
+      if (ready) return;
+      try { video.pause(); } catch (_) {}
+      video.playbackRate = 1;
+      try { video.currentTime = 0; } catch (_) {}
+      current = 0; ready = true; onScroll();
+    }
+
+    function prewarm() {
+      if (!video.duration) {
+        video.addEventListener('loadeddata', prewarm, { once: true });
+        return;
+      }
+      video.muted = true;
+      video.playbackRate = 4;
+      var safetyMs = (video.duration / 4) * 1000 + 1500;
+      var safety = setTimeout(finishPrewarm, safetyMs);
+      video.addEventListener('ended', function () { clearTimeout(safety); finishPrewarm(); }, { once: true });
+      var p = video.play();
+      if (p && p.then) {
+        p.catch(function () {
+          clearTimeout(safety);
+          var samples = 12, i = 0;
+          function nextSeek() {
+            if (i >= samples) { finishPrewarm(); return; }
+            try { video.currentTime = (i / (samples - 1)) * video.duration; } catch (_) {}
+            i++;
+            video.addEventListener('seeked', nextSeek, { once: true });
+          }
+          nextSeek();
+        });
+      }
     }
 
     window.addEventListener('wheel', function (e) {
@@ -587,10 +622,8 @@
     }, { passive: false });
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    video.addEventListener('loadeddata', function () {
-      video.pause(); current = 0; video.currentTime = 0; onScroll();
-    });
     video.addEventListener('ended', function () { complete = true; });
+    prewarm();
   }());
 </script>
 
