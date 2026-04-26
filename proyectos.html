@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos — Webs construidas | Drizzt Design</title>
+  <meta name="description" content="Selección de proyectos realizados por Drizzt Design: webs estáticas para estudios de arquitectura, ingeniería y servicios profesionales.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://drizzt-design.vercel.app/proyectos.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Drizzt Design">
+  <meta property="og:title" content="Proyectos — Drizzt Design">
+  <meta property="og:description" content="Webs construidas por Drizzt Design.">
+  <meta property="og:url" content="https://drizzt-design.vercel.app/proyectos.html">
+  <meta property="og:image" content="https://drizzt-design.vercel.app/assets/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --color-bg: #0a0a0a; --color-bg-2: #141414; --color-text: #fafafa; --color-mid: #888;
+      --color-line: #222; --color-accent: #fb923c; --color-accent-hover: #ea7c1f;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --max-w: 1280px;
+    }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; padding: 0 2rem; background: rgba(10,10,10,.95); border-bottom: 1px solid var(--color-line); }
+    .header-inner { max-width: var(--max-w); width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #fff; }
+    .brand span { color: var(--color-accent); }
+    nav ul { display: flex; gap: 2.25rem; }
+    nav a { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.7); transition: color .2s; }
+    nav a:hover, nav a.active { color: #fff; }
+    .header-cta { font-size: .8rem; font-weight: 600; padding: .55rem 1.25rem; border: 1px solid var(--color-accent); color: var(--color-accent); border-radius: 100px; transition: all .2s; }
+    .header-cta:hover { background: var(--color-accent); color: #000; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--color-bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.25rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: #fff; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.75rem; color: #fff; cursor: pointer; background: none; border: none; }
+
+    .page-hero { padding: 160px 2rem 100px; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1.25rem; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.0; letter-spacing: -.02em; max-width: 900px; }
+    .page-hero h1 em { font-style: normal; color: var(--color-accent); }
+    .page-hero p { margin-top: 1.5rem; max-width: 580px; font-size: 1.05rem; color: var(--color-mid); line-height: 1.7; }
+
+    section { padding: 80px 2rem; }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .proyectos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .proyecto { background: var(--color-bg-2); border: 1px solid var(--color-line); padding: 2.5rem; transition: border-color .25s; display: flex; flex-direction: column; gap: 1.5rem; }
+    .proyecto:hover { border-color: var(--color-accent); }
+    .proyecto-img { aspect-ratio: 16/10; background: var(--color-bg); overflow: hidden; position: relative; }
+    .proyecto-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .proyecto:hover .proyecto-img img { transform: scale(1.04); }
+    .proyecto-img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); display: flex; align-items: center; justify-content: center; color: var(--color-mid); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; }
+    .proyecto-meta-top { display: flex; justify-content: space-between; align-items: center; font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--color-mid); }
+    .proyecto-meta-top .tag { color: var(--color-accent); }
+    .proyecto h3 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; line-height: 1.1; letter-spacing: -.01em; color: #fff; }
+    .proyecto p { font-size: .95rem; color: var(--color-mid); line-height: 1.65; }
+    .proyecto-stack { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .proyecto-stack span { font-size: .7rem; padding: .25rem .65rem; background: var(--color-bg); border: 1px solid var(--color-line); border-radius: 100px; color: var(--color-mid); letter-spacing: .05em; }
+    .proyecto-link { display: inline-flex; align-items: center; gap: .5rem; font-size: .82rem; font-weight: 600; color: var(--color-accent); margin-top: auto; }
+    .proyecto-link:hover { color: var(--color-accent-hover); }
+    @media (max-width: 768px) { .proyectos-grid { grid-template-columns: 1fr; } }
+
+    .cta-final { background: var(--color-accent); color: #000; }
+    .cta-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: end; max-width: var(--max-w); margin: 0 auto; }
+    @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .cta-final h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; line-height: .98; letter-spacing: -.02em; }
+    .cta-final p { font-size: 1.1rem; color: rgba(0,0,0,.7); margin-bottom: 1.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .5rem; padding: .95rem 2rem; background: #000; color: var(--color-accent); font-size: .85rem; font-weight: 600; border-radius: 100px; transition: all .25s; }
+    .btn-primary:hover { background: #1a1a1a; }
+
+    footer { background: var(--color-bg); padding: 80px 2rem 40px; border-top: 1px solid var(--color-line); }
+    .footer-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-line); margin-bottom: 2rem; }
+    .footer-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .footer-brand span { color: var(--color-accent); }
+    .footer-desc { font-size: .9rem; color: var(--color-mid); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
+    .footer-col li { margin-bottom: .55rem; }
+    .footer-col a { font-size: .9rem; color: var(--color-mid); transition: color .2s; }
+    .footer-col a:hover { color: var(--color-accent); }
+    .footer-bottom { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; font-size: .78rem; color: var(--color-mid); flex-wrap: wrap; gap: 1rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { section { padding: 60px 1.25rem; } nav, .header-cta { display: none; } .hamburger { display: flex; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">Drizzt<span>.</span>Design</a>
+    <nav><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html" class="active">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></nav>
+    <a href="contacto.html" class="header-cta">Hablemos</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Estudio</a>
+  <a href="contacto.html" style="color:var(--color-accent);">Hablemos</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-eyebrow">Proyectos</p>
+    <h1>Webs <em>construidas</em>, no plantillas adaptadas.</h1>
+    <p>Una selección de proyectos recientes para estudios de arquitectura, ingeniería y servicios profesionales. Cada uno con su propia identidad y arquitectura técnica.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="proyectos-grid">
+
+      <article class="proyecto">
+        <div class="proyecto-img">
+          <div class="proyecto-img-placeholder">Foto · Gausark S.L.P.</div>
+        </div>
+        <div class="proyecto-meta-top">
+          <span class="tag">Arquitectura</span>
+          <span>2026</span>
+        </div>
+        <h3>Gausark S.L.P.</h3>
+        <p>Reconstrucción premium de la web del estudio de arquitectura Gausark, en Donostia. Hero con vídeo scroll-driven, galería de proyectos, paleta extraída del logo y SEO completo.</p>
+        <div class="proyecto-stack">
+          <span>HTML5</span>
+          <span>CSS Grid</span>
+          <span>Vanilla JS</span>
+          <span>FFmpeg</span>
+          <span>Vercel</span>
+        </div>
+        <a href="https://gausarkpremiumweb.vercel.app/" target="_blank" rel="noopener" class="proyecto-link">Ver web →</a>
+      </article>
+
+      <article class="proyecto">
+        <div class="proyecto-img">
+          <div class="proyecto-img-placeholder">Próximamente</div>
+        </div>
+        <div class="proyecto-meta-top">
+          <span class="tag"><!-- REVISAR: tipo --></span>
+          <span><!-- REVISAR: año --></span>
+        </div>
+        <h3><!-- REVISAR: nombre del proyecto --></h3>
+        <p><!-- REVISAR: descripción --></p>
+        <div class="proyecto-stack">
+          <span><!-- REVISAR --></span>
+        </div>
+        <a href="#" class="proyecto-link">Ver web →</a>
+      </article>
+
+      <article class="proyecto">
+        <div class="proyecto-img">
+          <div class="proyecto-img-placeholder">Próximamente</div>
+        </div>
+        <div class="proyecto-meta-top">
+          <span class="tag"><!-- REVISAR --></span>
+          <span><!-- REVISAR --></span>
+        </div>
+        <h3><!-- REVISAR --></h3>
+        <p><!-- REVISAR --></p>
+        <div class="proyecto-stack">
+          <span><!-- REVISAR --></span>
+        </div>
+        <a href="#" class="proyecto-link">Ver web →</a>
+      </article>
+
+      <article class="proyecto">
+        <div class="proyecto-img">
+          <div class="proyecto-img-placeholder">Próximamente</div>
+        </div>
+        <div class="proyecto-meta-top">
+          <span class="tag"><!-- REVISAR --></span>
+          <span><!-- REVISAR --></span>
+        </div>
+        <h3><!-- REVISAR --></h3>
+        <p><!-- REVISAR --></p>
+        <div class="proyecto-stack">
+          <span><!-- REVISAR --></span>
+        </div>
+        <a href="#" class="proyecto-link">Ver web →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-grid">
+    <h2>¿Tu proyecto<br>en esta lista?</h2>
+    <div>
+      <p>Cuéntanos tu idea. La construimos con el mismo cuidado.</p>
+      <a href="contacto.html" class="btn-primary">Hablemos →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">Drizzt<span>.</span>Design</p>
+      <p class="footer-desc">Estudio de diseño y desarrollo web especializado en sitios estáticos premium para estudios profesionales.</p>
+    </div>
+    <div class="footer-col"><h4>Navegación</h4><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul>
+      <li><a href="contacto.html">Iniciar proyecto</a></li>
+      <li><a href="mailto:hola@drizzt.design">hola@drizzt.design</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Conecta</h4><ul>
+      <li><a href="https://github.com/drizztdesign" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Drizzt Design · Todos los derechos reservados</span>
+    <span>Construido con HTML + CSS + JS puro</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+</script>
+</body>
+</html>

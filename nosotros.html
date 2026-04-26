@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El estudio — Filosofía y método | Drizzt Design</title>
+  <meta name="description" content="Drizzt Design es un estudio de diseño y desarrollo web. Trabajamos sin frameworks, mobile-first, con foco en velocidad, accesibilidad y diseño cuidado.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://drizzt-design.vercel.app/nosotros.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Drizzt Design">
+  <meta property="og:title" content="El estudio — Drizzt Design">
+  <meta property="og:description" content="Filosofía y método de un estudio de diseño y desarrollo web.">
+  <meta property="og:url" content="https://drizzt-design.vercel.app/nosotros.html">
+  <meta property="og:image" content="https://drizzt-design.vercel.app/assets/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Sobre Drizzt Design",
+    "url": "https://drizzt-design.vercel.app/nosotros.html",
+    "mainEntity": { "@id": "https://drizzt-design.vercel.app/#organization" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --color-bg: #0a0a0a; --color-bg-2: #141414; --color-text: #fafafa; --color-mid: #888;
+      --color-line: #222; --color-accent: #fb923c; --color-accent-hover: #ea7c1f;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --max-w: 1280px;
+    }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; padding: 0 2rem; background: rgba(10,10,10,.95); border-bottom: 1px solid var(--color-line); }
+    .header-inner { max-width: var(--max-w); width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #fff; }
+    .brand span { color: var(--color-accent); }
+    nav ul { display: flex; gap: 2.25rem; }
+    nav a { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.7); transition: color .2s; }
+    nav a:hover, nav a.active { color: #fff; }
+    .header-cta { font-size: .8rem; font-weight: 600; padding: .55rem 1.25rem; border: 1px solid var(--color-accent); color: var(--color-accent); border-radius: 100px; transition: all .2s; }
+    .header-cta:hover { background: var(--color-accent); color: #000; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--color-bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.25rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: #fff; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.75rem; color: #fff; cursor: pointer; background: none; border: none; }
+
+    .page-hero { padding: 160px 2rem 100px; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1.25rem; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.0; letter-spacing: -.02em; max-width: 900px; }
+    .page-hero h1 em { font-style: normal; color: var(--color-accent); }
+
+    section { padding: 100px 2rem; }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .manifiesto { background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .manifiesto-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; }
+    .manifiesto h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
+    .manifiesto-text p { font-size: 1.05rem; color: var(--color-mid); line-height: 1.8; margin-bottom: 1.25rem; }
+    .manifiesto-text p strong { color: var(--color-text); font-weight: 500; }
+    @media (max-width: 1024px) { .manifiesto-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .principios { background: var(--color-bg-2); border-bottom: 1px solid var(--color-line); }
+    .principios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+    .principio { padding: 2.5rem 2rem; border-top: 1px solid var(--color-accent); }
+    .principio-num { font-family: var(--font-display); font-size: .8rem; color: var(--color-accent); margin-bottom: 1rem; letter-spacing: .1em; }
+    .principio h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; margin-bottom: 1rem; color: #fff; letter-spacing: -.01em; }
+    .principio p { font-size: .92rem; color: var(--color-mid); line-height: 1.7; }
+    @media (max-width: 1024px) { .principios-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .principios-grid { grid-template-columns: 1fr; } }
+
+    .stack { background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .stack-list { margin-top: 4rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--color-line); border: 1px solid var(--color-line); }
+    .stack-item { padding: 2rem; background: var(--color-bg); display: flex; flex-direction: column; gap: .5rem; }
+    .stack-item .label { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--color-mid); }
+    .stack-item .value { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: #fff; }
+    @media (max-width: 768px) { .stack-list { grid-template-columns: 1fr; } }
+
+    .cta-final { background: var(--color-accent); color: #000; }
+    .cta-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: end; max-width: var(--max-w); margin: 0 auto; }
+    @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .cta-final h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; line-height: .98; letter-spacing: -.02em; }
+    .cta-final p { font-size: 1.1rem; color: rgba(0,0,0,.7); margin-bottom: 1.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .5rem; padding: .95rem 2rem; background: #000; color: var(--color-accent); font-size: .85rem; font-weight: 600; border-radius: 100px; transition: all .25s; }
+    .btn-primary:hover { background: #1a1a1a; }
+
+    footer { background: var(--color-bg); padding: 80px 2rem 40px; border-top: 1px solid var(--color-line); }
+    .footer-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-line); margin-bottom: 2rem; }
+    .footer-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .footer-brand span { color: var(--color-accent); }
+    .footer-desc { font-size: .9rem; color: var(--color-mid); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
+    .footer-col li { margin-bottom: .55rem; }
+    .footer-col a { font-size: .9rem; color: var(--color-mid); transition: color .2s; }
+    .footer-col a:hover { color: var(--color-accent); }
+    .footer-bottom { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; font-size: .78rem; color: var(--color-mid); flex-wrap: wrap; gap: 1rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { section { padding: 70px 1.25rem; } nav, .header-cta { display: none; } .hamburger { display: flex; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">Drizzt<span>.</span>Design</a>
+    <nav><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html" class="active">Estudio</a></li>
+    </ul></nav>
+    <a href="contacto.html" class="header-cta">Hablemos</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Estudio</a>
+  <a href="contacto.html" style="color:var(--color-accent);">Hablemos</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-eyebrow">El estudio</p>
+    <h1>Diseñamos webs como se diseñaba <em>antes</em>: con cuidado.</h1>
+  </div>
+</div>
+
+<section class="manifiesto">
+  <div class="container">
+    <div class="manifiesto-grid">
+      <div>
+        <h2>Manifiesto.</h2>
+      </div>
+      <div class="manifiesto-text">
+        <p><strong>La web profesional ha perdido alma.</strong> Generadores con IA, plantillas de WordPress recicladas, agencias que entregan el mismo diseño cambiando solo el logo.</p>
+        <p>Drizzt Design existe para devolverle a las webs lo que tenían antes: <strong>identidad propia, código limpio, atención al detalle</strong>. Cada cliente recibe un sitio único, construido a mano, optimizado al milímetro.</p>
+        <p>No vendemos "soluciones". Vendemos <strong>tiempo y oficio</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="principios">
+  <div class="container">
+    <p class="section-eyebrow">Principios</p>
+    <h2 class="manifiesto h2" style="font-family:var(--font-display);font-size:clamp(2rem, 4.5vw, 3.5rem);font-weight:500;line-height:1.05;letter-spacing:-.02em;">Cómo trabajamos.</h2>
+    <div class="principios-grid">
+      <div class="principio">
+        <p class="principio-num">01</p>
+        <h3>Sin frameworks innecesarios</h3>
+        <p>HTML, CSS y JavaScript puro. La web debe poder leerse en 50 años con el mismo navegador. Si no necesitas React, no lo añadimos.</p>
+      </div>
+      <div class="principio">
+        <p class="principio-num">02</p>
+        <h3>Mobile-first, sin excepciones</h3>
+        <p>El móvil es el navegador real de tus visitantes. Diseñamos primero para móvil, luego escalamos. No al revés.</p>
+      </div>
+      <div class="principio">
+        <p class="principio-num">03</p>
+        <h3>Velocidad como feature</h3>
+        <p>PageSpeed mobile mínimo 90. Imágenes optimizadas, fuentes precargadas, scripts diferidos. La velocidad es parte del diseño.</p>
+      </div>
+      <div class="principio">
+        <p class="principio-num">04</p>
+        <h3>Diseño editorial</h3>
+        <p>Tipografía cuidada, espacios generosos, jerarquías claras. Las webs deben leerse como una buena revista, no como un panfleto.</p>
+      </div>
+      <div class="principio">
+        <p class="principio-num">05</p>
+        <h3>Contenido real desde el día uno</h3>
+        <p>Nada de Lorem ipsum. Si el cliente no tiene fotos o textos, paramos hasta tenerlos. Nunca diseñamos sobre ficción.</p>
+      </div>
+      <div class="principio">
+        <p class="principio-num">06</p>
+        <h3>Auto-deploy continuo</h3>
+        <p>Cada cambio se publica solo en Vercel vía GitHub. Sin FTPs, sin "sube esto al servidor". El cliente ve la web actualizada al instante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="container">
+    <p class="section-eyebrow">Stack técnico</p>
+    <h2 style="font-family:var(--font-display);font-size:clamp(2rem, 4.5vw, 3.5rem);font-weight:500;line-height:1.05;letter-spacing:-.02em;">Las herramientas que usamos.</h2>
+    <div class="stack-list">
+      <div class="stack-item">
+        <span class="label">Lenguajes</span>
+        <span class="value">HTML5 · CSS3 · JavaScript</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Tipografías</span>
+        <span class="value">Google Fonts · Variable Fonts</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Hosting</span>
+        <span class="value">Vercel (auto-deploy)</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Versionado</span>
+        <span class="value">Git + GitHub</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Vídeo / imagen</span>
+        <span class="value">FFmpeg · WebP · Squoosh</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Formularios</span>
+        <span class="value">Formspree</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">Analítica</span>
+        <span class="value">Plausible · Google Analytics</span>
+      </div>
+      <div class="stack-item">
+        <span class="label">SEO</span>
+        <span class="value">Schema.org · Open Graph · Search Console</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-grid">
+    <h2>¿Quieres trabajar<br>con nosotros?</h2>
+    <div>
+      <p>El estudio acepta un número limitado de proyectos al año para mantener la calidad.</p>
+      <a href="contacto.html" class="btn-primary">Contactar →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">Drizzt<span>.</span>Design</p>
+      <p class="footer-desc">Estudio de diseño y desarrollo web especializado en sitios estáticos premium para estudios profesionales.</p>
+    </div>
+    <div class="footer-col"><h4>Navegación</h4><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul>
+      <li><a href="contacto.html">Iniciar proyecto</a></li>
+      <li><a href="mailto:hola@drizzt.design">hola@drizzt.design</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Conecta</h4><ul>
+      <li><a href="https://github.com/drizztdesign" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Drizzt Design · Todos los derechos reservados</span>
+    <span>Construido con HTML + CSS + JS puro</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+</script>
+</body>
+</html>

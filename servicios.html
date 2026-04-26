@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios — Diseño, desarrollo, SEO y deploy | Drizzt Design</title>
+  <meta name="description" content="Servicios de Drizzt Design: diseño web a medida, desarrollo en HTML/CSS/JS puro, SEO técnico, y mantenimiento con auto-deploy GitHub→Vercel.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://drizzt-design.vercel.app/servicios.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Drizzt Design">
+  <meta property="og:title" content="Servicios — Drizzt Design">
+  <meta property="og:description" content="Diseño, desarrollo, SEO y deploy. Web estática premium para estudios profesionales.">
+  <meta property="og:url" content="https://drizzt-design.vercel.app/servicios.html">
+  <meta property="og:image" content="https://drizzt-design.vercel.app/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Servicios de Drizzt Design",
+    "itemListElement": [
+      { "@type": "Service", "position": 1, "name": "Diseño web", "description": "Identidad visual y maquetación a medida." },
+      { "@type": "Service", "position": 2, "name": "Desarrollo frontend", "description": "HTML/CSS/JS puro, mobile-first." },
+      { "@type": "Service", "position": 3, "name": "SEO técnico", "description": "Meta, OG, JSON-LD, sitemap." },
+      { "@type": "Service", "position": 4, "name": "Deploy y mantenimiento", "description": "Auto-deploy GitHub→Vercel." }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --color-bg: #0a0a0a; --color-bg-2: #141414; --color-text: #fafafa; --color-mid: #888;
+      --color-line: #222; --color-accent: #fb923c; --color-accent-hover: #ea7c1f;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --max-w: 1280px;
+    }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; padding: 0 2rem; background: rgba(10,10,10,.95); border-bottom: 1px solid var(--color-line); }
+    .header-inner { max-width: var(--max-w); width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; letter-spacing: .04em; color: #fff; }
+    .brand span { color: var(--color-accent); }
+    nav ul { display: flex; gap: 2.25rem; }
+    nav a { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.7); transition: color .2s; }
+    nav a:hover, nav a.active { color: #fff; }
+    .header-cta { font-size: .8rem; font-weight: 600; padding: .55rem 1.25rem; border: 1px solid var(--color-accent); color: var(--color-accent); border-radius: 100px; transition: all .2s; }
+    .header-cta:hover { background: var(--color-accent); color: #000; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--color-bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.25rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: #fff; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.75rem; color: #fff; cursor: pointer; background: none; border: none; }
+
+    .page-hero { padding: 160px 2rem 100px; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1.25rem; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.0; letter-spacing: -.02em; max-width: 900px; }
+    .page-hero h1 em { font-style: normal; color: var(--color-accent); }
+
+    section { padding: 100px 2rem; }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .servicio-bloque { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; padding: 80px 0; border-bottom: 1px solid var(--color-line); align-items: start; }
+    .servicio-bloque:last-child { border-bottom: none; }
+    .servicio-num { font-family: var(--font-display); font-size: 5rem; font-weight: 500; color: var(--color-accent); line-height: 1; opacity: .5; }
+    .servicio-bloque h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.4rem); font-weight: 500; margin-bottom: 1.25rem; line-height: 1.1; letter-spacing: -.01em; }
+    .servicio-bloque > div:last-child p { font-size: 1rem; color: var(--color-mid); line-height: 1.75; margin-bottom: 1rem; max-width: 640px; }
+    .servicio-incluye { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin: 2rem 0; }
+    .servicio-incluye li { font-size: .9rem; color: var(--color-text); padding-left: 1.5rem; position: relative; }
+    .servicio-incluye li::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); }
+    .servicio-cta { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; padding: .85rem 1.75rem; background: var(--color-accent); color: #000; font-size: .82rem; font-weight: 600; border-radius: 100px; transition: all .25s; }
+    .servicio-cta:hover { background: var(--color-accent-hover); transform: translateY(-2px); }
+    @media (max-width: 1024px) { .servicio-bloque { grid-template-columns: 1fr; gap: 2rem; } .servicio-num { font-size: 3rem; } .servicio-incluye { grid-template-columns: 1fr; } }
+
+    .cta-final { background: var(--color-accent); color: #000; }
+    .cta-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: end; max-width: var(--max-w); margin: 0 auto; }
+    @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .cta-final h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 500; line-height: .98; letter-spacing: -.02em; }
+    .cta-final p { font-size: 1.1rem; color: rgba(0,0,0,.7); margin-bottom: 1.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .5rem; padding: .95rem 2rem; background: #000; color: var(--color-accent); font-size: .85rem; font-weight: 600; border-radius: 100px; transition: all .25s; }
+    .btn-primary:hover { background: #1a1a1a; }
+
+    footer { background: var(--color-bg); padding: 80px 2rem 40px; border-top: 1px solid var(--color-line); }
+    .footer-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-line); margin-bottom: 2rem; }
+    .footer-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .footer-brand span { color: var(--color-accent); }
+    .footer-desc { font-size: .9rem; color: var(--color-mid); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
+    .footer-col li { margin-bottom: .55rem; }
+    .footer-col a { font-size: .9rem; color: var(--color-mid); transition: color .2s; }
+    .footer-col a:hover { color: var(--color-accent); }
+    .footer-bottom { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; font-size: .78rem; color: var(--color-mid); flex-wrap: wrap; gap: 1rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { section { padding: 70px 1.25rem; } nav, .header-cta { display: none; } .hamburger { display: flex; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">Drizzt<span>.</span>Design</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html" class="active">Servicios</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="nosotros.html">Estudio</a></li>
+      </ul>
+    </nav>
+    <a href="contacto.html" class="header-cta">Hablemos</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Estudio</a>
+  <a href="contacto.html" style="color:var(--color-accent);">Hablemos</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-eyebrow">Servicios</p>
+    <h1>Cuatro <em>capas</em> que cubren todo el ciclo<br>de tu web profesional.</h1>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="servicio-bloque">
+    <div class="servicio-num">01</div>
+    <div>
+      <h2>Diseño web a medida</h2>
+      <p>Sin plantillas. Cada proyecto comienza con una propuesta de diseño exclusiva: paleta de marca, tipografías, sistema de espaciado y mockups de las secciones principales.</p>
+      <p>Trabajamos sobre referencias del sector y la identidad existente del cliente para construir un lenguaje visual único.</p>
+      <ul class="servicio-incluye">
+        <li>Sistema de diseño (paleta, tipos, retícula)</li>
+        <li>Mockups de hero y secciones clave</li>
+        <li>Variantes mobile / desktop</li>
+        <li>Iteración hasta validación final</li>
+      </ul>
+      <a href="contacto.html?servicio=diseno" class="servicio-cta">Solicitar presupuesto →</a>
+    </div>
+  </div>
+
+  <div class="servicio-bloque">
+    <div class="servicio-num">02</div>
+    <div>
+      <h2>Desarrollo frontend</h2>
+      <p>Construcción del sitio en HTML, CSS y JavaScript puros. Sin React, sin Vue, sin frameworks pesados que añadan complejidad innecesaria a una web informativa.</p>
+      <p>Mobile-first siempre. Animaciones cuidadas con CSS y JS nativo. Accesibilidad WCAG. Compatible con todos los navegadores modernos.</p>
+      <ul class="servicio-incluye">
+        <li>HTML semántico</li>
+        <li>CSS con variables y grid moderno</li>
+        <li>JS vanilla, sin dependencias</li>
+        <li>Mobile-first y responsive</li>
+        <li>Animaciones GPU-accelerated</li>
+        <li>Accesibilidad WCAG 2.2</li>
+      </ul>
+      <a href="contacto.html?servicio=desarrollo" class="servicio-cta">Solicitar presupuesto →</a>
+    </div>
+  </div>
+
+  <div class="servicio-bloque">
+    <div class="servicio-num">03</div>
+    <div>
+      <h2>SEO técnico</h2>
+      <p>La web sale lista para Google desde el primer día. Meta tags optimizados, Open Graph y Twitter Cards para que se vea bien al compartir en redes, y datos estructurados Schema.org para enriquecer los resultados de búsqueda.</p>
+      <ul class="servicio-incluye">
+        <li>Meta title + description por página</li>
+        <li>Open Graph y Twitter Cards</li>
+        <li>JSON-LD (LocalBusiness, Service, etc.)</li>
+        <li>sitemap.xml y robots.txt</li>
+        <li>Canonical URLs</li>
+        <li>Configuración Google Search Console</li>
+      </ul>
+      <a href="contacto.html?servicio=seo" class="servicio-cta">Solicitar presupuesto →</a>
+    </div>
+  </div>
+
+  <div class="servicio-bloque">
+    <div class="servicio-num">04</div>
+    <div>
+      <h2>Deploy y mantenimiento</h2>
+      <p>Deploy automatizado: el código vive en GitHub, cada cambio se publica en Vercel en menos de 30 segundos. Hosting incluido en plan gratuito de Vercel para tráficos típicos.</p>
+      <p>Mantenimiento por horas (cambios puntuales) o paquete mensual (revisiones, contenido, mejoras continuas).</p>
+      <ul class="servicio-incluye">
+        <li>Repositorio GitHub (privado o público)</li>
+        <li>Auto-deploy Vercel en cada push</li>
+        <li>Conexión de dominio personalizado</li>
+        <li>SSL automático</li>
+        <li>Soporte por horas</li>
+        <li>Plan mensual opcional</li>
+      </ul>
+      <a href="contacto.html?servicio=deploy" class="servicio-cta">Solicitar presupuesto →</a>
+    </div>
+  </div>
+
+</div>
+
+<section class="cta-final">
+  <div class="cta-grid">
+    <h2>¿Empezamos<br>con tu proyecto?</h2>
+    <div>
+      <p>Cuéntanos qué necesitas. Respuesta en menos de 24 horas con presupuesto cerrado.</p>
+      <a href="contacto.html" class="btn-primary">Iniciar proyecto →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">Drizzt<span>.</span>Design</p>
+      <p class="footer-desc">Estudio de diseño y desarrollo web especializado en sitios estáticos premium para estudios profesionales.</p>
+    </div>
+    <div class="footer-col"><h4>Navegación</h4><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul>
+      <li><a href="contacto.html">Iniciar proyecto</a></li>
+      <li><a href="mailto:hola@drizzt.design">hola@drizzt.design</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Conecta</h4><ul>
+      <li><a href="https://github.com/drizztdesign" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Drizzt Design · Todos los derechos reservados</span>
+    <span>Construido con HTML + CSS + JS puro</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+</script>
+</body>
+</html>

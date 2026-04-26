@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Iniciar proyecto | Drizzt Design</title>
+  <meta name="description" content="Cuéntanos tu proyecto. Respondemos en menos de 24 horas con una propuesta inicial. Drizzt Design — estudio de diseño y desarrollo web.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://drizzt-design.vercel.app/contacto.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Drizzt Design">
+  <meta property="og:title" content="Contacto — Drizzt Design">
+  <meta property="og:description" content="Iniciar proyecto. Respuesta en 24 horas.">
+  <meta property="og:url" content="https://drizzt-design.vercel.app/contacto.html">
+  <meta property="og:image" content="https://drizzt-design.vercel.app/assets/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contacto Drizzt Design",
+    "url": "https://drizzt-design.vercel.app/contacto.html",
+    "mainEntity": { "@id": "https://drizzt-design.vercel.app/#organization" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --color-bg: #0a0a0a; --color-bg-2: #141414; --color-text: #fafafa; --color-mid: #888;
+      --color-line: #222; --color-accent: #fb923c; --color-accent-hover: #ea7c1f;
+      --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+      --max-w: 1280px;
+    }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; padding: 0 2rem; background: rgba(10,10,10,.95); border-bottom: 1px solid var(--color-line); }
+    .header-inner { max-width: var(--max-w); width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #fff; }
+    .brand span { color: var(--color-accent); }
+    nav ul { display: flex; gap: 2.25rem; }
+    nav a { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.7); transition: color .2s; }
+    nav a:hover, nav a.active { color: #fff; }
+    .header-cta { font-size: .8rem; font-weight: 600; padding: .55rem 1.25rem; border: 1px solid var(--color-accent); color: var(--color-accent); border-radius: 100px; transition: all .2s; }
+    .header-cta:hover { background: var(--color-accent); color: #000; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--color-bg); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.25rem; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: 500; color: #fff; }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.75rem; color: #fff; cursor: pointer; background: none; border: none; }
+
+    .page-hero { padding: 160px 2rem 80px; background: var(--color-bg); border-bottom: 1px solid var(--color-line); }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-eyebrow { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 1.25rem; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500; line-height: 1.0; letter-spacing: -.02em; max-width: 900px; }
+    .page-hero h1 em { font-style: normal; color: var(--color-accent); }
+
+    section { padding: 80px 2rem; }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .contacto-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start; }
+    @media (max-width: 1024px) { .contacto-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .contact-info h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; margin-bottom: 2rem; line-height: 1.1; }
+    .contact-item { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-line); }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item-label { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--color-accent); }
+    .contact-item a { font-size: 1rem; color: var(--color-text); transition: color .2s; }
+    .contact-item a:hover { color: var(--color-accent); }
+    .contact-item p { font-size: .9rem; color: var(--color-mid); }
+
+    .form-title { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; margin-bottom: 2rem; line-height: 1.1; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.25rem; }
+    .form-group label { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-mid); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: .85rem 1rem; background: var(--color-bg-2); border: 1px solid var(--color-line);
+      font-family: var(--font-body); font-size: .95rem; color: var(--color-text);
+      border-radius: 4px; transition: border-color .2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-accent); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-note { font-size: .82rem; color: var(--color-mid); margin-bottom: 1.25rem; }
+    .form-note a { color: var(--color-accent); }
+    .btn-submit { display: inline-flex; align-items: center; gap: .5rem; padding: 1rem 2.25rem; background: var(--color-accent); color: #000; font-size: .85rem; font-weight: 600; border: none; border-radius: 100px; cursor: pointer; transition: all .25s; }
+    .btn-submit:hover { background: var(--color-accent-hover); transform: translateY(-2px); }
+    .form-success { display: none; padding: 1.25rem; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: #4ade80; font-size: .92rem; margin-top: 1rem; border-radius: 4px; }
+    .form-error-msg { display: none; padding: 1.25rem; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: #f87171; font-size: .92rem; margin-top: 1rem; border-radius: 4px; }
+    .field-error { color: #f87171; font-size: .8rem; margin-top: .25rem; display: none; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    footer { background: var(--color-bg); padding: 80px 2rem 40px; border-top: 1px solid var(--color-line); }
+    .footer-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--color-line); margin-bottom: 2rem; }
+    .footer-brand { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+    .footer-brand span { color: var(--color-accent); }
+    .footer-desc { font-size: .9rem; color: var(--color-mid); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
+    .footer-col li { margin-bottom: .55rem; }
+    .footer-col a { font-size: .9rem; color: var(--color-mid); transition: color .2s; }
+    .footer-col a:hover { color: var(--color-accent); }
+    .footer-bottom { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; font-size: .78rem; color: var(--color-mid); flex-wrap: wrap; gap: 1rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { section { padding: 60px 1.25rem; } nav, .header-cta { display: none; } .hamburger { display: flex; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">Drizzt<span>.</span>Design</a>
+    <nav><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></nav>
+    <a href="contacto.html" class="header-cta active">Hablemos</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html">Inicio</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Estudio</a>
+  <a href="contacto.html" style="color:var(--color-accent);">Hablemos</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-eyebrow">Iniciar proyecto</p>
+    <h1>Cuéntanos qué <em>necesitas</em>.<br>Respondemos en 24 horas.</h1>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="contacto-grid">
+
+      <div class="contact-info">
+        <h2>Donde encontrarnos.</h2>
+
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <a href="mailto:hola@drizzt.design"><!-- REVISAR: email real -->hola@drizzt.design</a>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-label">GitHub</span>
+          <a href="https://github.com/drizztdesign" target="_blank" rel="noopener">github.com/drizztdesign</a>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-label">Tiempo de respuesta</span>
+          <p>Menos de 24 horas en días laborables. Si es urgente, dilo en el asunto.</p>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-label">Disponibilidad</span>
+          <p>Aceptamos un número limitado de proyectos al año para mantener la calidad. Consulta disponibilidad antes de cerrar plazos.</p>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="form-title">Cuéntanos tu proyecto.</h2>
+        <!-- REVISAR: sustituir YOUR_FORM_ID por el ID real de Formspree -->
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+              <span class="field-error" id="err-nombre">Por favor, indica tu nombre.</span>
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa o estudio</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nombre del estudio">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            <span class="field-error" id="err-email">Email inválido.</span>
+          </div>
+          <div class="form-group">
+            <label for="tipo">¿Qué necesitas?</label>
+            <select id="tipo" name="tipo">
+              <option value="">— Selecciona —</option>
+              <option>Web nueva desde cero</option>
+              <option>Rebuild de web existente</option>
+              <option>Mantenimiento mensual</option>
+              <option>Solo SEO técnico</option>
+              <option>Otro / consulta</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="presupuesto">Presupuesto orientativo</label>
+            <select id="presupuesto" name="presupuesto">
+              <option value="">— Selecciona —</option>
+              <option>&lt; 1.000 €</option>
+              <option>1.000 - 3.000 €</option>
+              <option>3.000 - 6.000 €</option>
+              <option>6.000 - 10.000 €</option>
+              <option>&gt; 10.000 €</option>
+              <option>Aún no lo sé</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Describe tu proyecto: sector, objetivos, plazos…" required></textarea>
+            <span class="field-error" id="err-mensaje">Cuéntanos algo sobre tu proyecto.</span>
+          </div>
+          <p class="form-note">Al enviar aceptas que usemos tus datos para responder a tu consulta. No los compartiremos con nadie.</p>
+          <button type="submit" class="btn-submit">Enviar mensaje →</button>
+          <div class="form-success" id="formSuccess">✓ Mensaje enviado. Te respondemos en menos de 24 horas.</div>
+          <div class="form-error-msg" id="formError">✗ No se ha podido enviar. Inténtalo de nuevo o escríbenos directamente a hola@drizzt.design.</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">Drizzt<span>.</span>Design</p>
+      <p class="footer-desc">Estudio de diseño y desarrollo web especializado en sitios estáticos premium para estudios profesionales.</p>
+    </div>
+    <div class="footer-col"><h4>Navegación</h4><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="nosotros.html">Estudio</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul>
+      <li><a href="contacto.html">Iniciar proyecto</a></li>
+      <li><a href="mailto:hola@drizzt.design">hola@drizzt.design</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Conecta</h4><ul>
+      <li><a href="https://github.com/drizztdesign" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Drizzt Design · Todos los derechos reservados</span>
+    <span>Construido con HTML + CSS + JS puro</span>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valid = true;
+    ['nombre','email','mensaje'].forEach(id => {
+      const el = document.getElementById(id);
+      const err = document.getElementById('err-' + id);
+      if (!el.value.trim() || (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+        err.style.display = 'block'; valid = false;
+      } else { err.style.display = 'none'; }
+    });
+    if (!valid) return;
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        document.getElementById('formSuccess').style.display = 'block';
+        document.getElementById('formError').style.display = 'none';
+        form.reset();
+      } else { throw new Error(); }
+    } catch {
+      document.getElementById('formError').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+    }
+    btn.textContent = 'Enviar mensaje →';
+    btn.disabled = false;
+  });
+</script>
+</body>
+</html>
