@@ -138,6 +138,29 @@ footer { background: transparent; }
 .servicios { background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.35) 50%, transparent 100%); }
 .proyectos-preview { background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.25) 50%, transparent 100%); }
 
+/* Proyecto-card preview (index): foto de fondo + overlay degradado */
+.proyecto-card { isolation: isolate; }
+.proyecto-card-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .55;
+  transition: opacity .5s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);
+  z-index: 0;
+}
+.proyecto-card:hover .proyecto-card-bg {
+  opacity: .85;
+  transform: scale(1.06);
+}
+.proyecto-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,5,7,.15) 0%, rgba(5,5,7,.6) 55%, rgba(5,5,7,.94) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.proyecto-card .proyecto-card-content { z-index: 2; position: absolute; }
+
 /* Servicios grid: quita el gris-grid del CSS base */
 .servicios-grid { background: transparent !important; border: none !important; gap: 1.25rem !important; }
 /* Stack list (nosotros): mismo tratamiento */
